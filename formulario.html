@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formulário de Tarefas</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f2f2f2;
+      }
+
+      .container {
+        width: 400px;
+        background-color: #ffffff;
+        border-radius: 6px;
+        padding: 20px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 0;
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+
+      button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      #report {
+        margin-top: 20px;
+        border: 1px solid #cccccc;
+        padding: 10px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>
+      Formulário <br />
+      de Tarefas
+    </h2>
+    <form id="taskForm">
+      <label for="taskDescription">Descrever Tarefa:</label><br />
+      <textarea id="taskDescription" rows="4" cols="50"></textarea><br />
+
+      <label for="taskLevel">Nível de Conhecimento da Tarefa:</label><br />
+      <select id="taskLevel">
+        <option value="iniciante">Iniciante</option>
+        <option value="intermediario">Intermediário</option>
+        <option value="avancado">Avançado</option></select
+      ><br />
+
+      <label for="taskDeveloper">Desenvolvedor da Tarefa:</label><br />
+      <input type="text" id="taskDeveloper" disabled /><br />
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <h2>Relatório</h2>
+    <div id="report"></div>
+
+    <script>
+      const form = document.getElementById("taskForm");
+      const taskDescription = document.getElementById("taskDescription");
+      const taskLevel = document.getElementById("taskLevel");
+      const taskDeveloper = document.getElementById("taskDeveloper");
+      const report = document.getElementById("report");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const description = taskDescription.value;
+        const level = taskLevel.value;
+        let developer;
+
+        if (level === "iniciante") {
+          developer = "Desenvolvedor Iniciante";
+        } else if (level === "intermediario") {
+          developer = "Desenvolvedor Intermediário";
+        } else if (level === "avancado") {
+          developer = "Desenvolvedor Avançado";
+        }
+
+        taskDeveloper.value = developer;
+
+        report.innerHTML = `
+                <p><strong>Descrição da Tarefa:</strong> ${description}</p>
+                <p><strong>Nível de Conhecimento:</strong> ${level}</p>
+                <p><strong>Desenvolvedor da Tarefa:</strong> ${developer}</p>
+            `;
+      });
+    </script>
+  </body>
+</html>
